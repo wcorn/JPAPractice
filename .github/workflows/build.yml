@@ -5,9 +5,9 @@ on:
     branches: [ develop ]
 
 env:
-  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/label-go
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/jpa
   VERSION: ${{ github.sha }}
-  NAME: label-go
+  NAME: jpa
 
 jobs:
   build:
@@ -56,7 +56,7 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    runs-on: [ self-hosted, label-go ]
+    runs-on: [ self-hosted, jpa ]
     steps:
       - name: Login to ghcr
         uses: docker/login-action@v1
@@ -68,4 +68,4 @@ jobs:
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}
-          docker run -d -p 9000:9000 -e JAVA_OPTS=-Djasypt.encryptor.password=${{ secrets.JASYPT_KEY }} --name label-go --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 9000:9000 -e JAVA_OPTS=-Djasypt.encryptor.password=${{ secrets.JASYPT_KEY }} --name jpa --restart always ${{ env.DOCKER_IMAGE }}:latest
