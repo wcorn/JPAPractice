@@ -1,6 +1,5 @@
 package com.base.project.global.config.SecurityConfig;
 
-
 import com.base.project.global.config.SecurityConfig.jwt.JwtAuthenticationCheckFilter;
 import com.base.project.global.config.SecurityConfig.jwt.JwtAuthenticationEntryPoint;
 import com.base.project.global.config.SecurityConfig.jwt.JwtTokenProvider;
@@ -9,33 +8,28 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.authentication.AuthenticationManagerFactoryBean;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Collections;
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private static final String[] POST_PERMITTED_URLS = {
-            "/api/user/signup", "/api/user/login"
+    private static final String[] PERMITTED_URLS = {
+            "/test/**"
     };
-
-    @Bean
-    public static BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public SecurityFilterChain filterChain(
@@ -46,19 +40,17 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable() // //서버에 인증정보를 저장하지 않기 때문에 굳이 불필요한 csrf 코드들을 작성할 필요가 없다.
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //스프링시큐리티가 생성하지도않고 기존것을 사용하지도 않음 ->JWT 같은토큰방식을 쓸때 사용하는 설정
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //스프링시큐리티가 세션을 생성하지도않고 기존것을 사용하지도 않음 ->JWT 같은토큰방식을 쓸때 사용하는 설정
                 .and()
-                .formLogin().disable()  // 서버에서  View를 배포하지 안으므로 disable
-                .httpBasic().disable() // JWT 인증 방식을 사용하기에 httpBasic을 이용한 인증방식 사용X
-
-                .addFilterAfter(jwtAuthenticationCheckFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin().disable()  // 서버에서  View를 배포하지 않으므로 disable
+                .httpBasic().disable() // JWT 인증 방식을 사용하기에 httpBasic을 이용한 인증방식 사용 안함
+                .addFilterAfter(jwtAuthenticationCheckFilter, UsernamePasswordAuthenticationFilter.class)//필터 추가
                 .exceptionHandling(config -> config
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 )
-                .authorizeRequests(antz -> antz
-                        .antMatchers(HttpMethod.POST, POST_PERMITTED_URLS).permitAll()
-                        .antMatchers("/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated()
+                .authorizeHttpRequests(ant -> ant
+                        .antMatchers(PERMITTED_URLS).permitAll() // 해당 문자열 배열에 저장된 uri 요청은 제외
+                        .anyRequest().authenticated() // 모든 요청은 Auth 받아야함
                 );
         return http.build();
     }
@@ -67,12 +59,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
-
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -93,10 +83,5 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationCheckFilter jwtAuthenticationCheckFilter(JwtTokenProvider jwtTokenProvider) {
         return new JwtAuthenticationCheckFilter(jwtTokenProvider);
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().antMatchers("/swagger-ui/**");
     }
 }

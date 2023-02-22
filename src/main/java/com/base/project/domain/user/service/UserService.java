@@ -23,9 +23,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserService {
 
-            private final UserRepository userRepository;
-            private final PasswordEncoder passwordEncoder;
-            private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
 }

@@ -14,18 +14,19 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/test")
+@RequestMapping("/test")
 public class TestController {
-    @PostMapping("/success")
+    @GetMapping("/success")
     public ResponseEntity<ApiResponse<String>> testSuccess() {
         String data = "test api success";
-        log.info("test controller {}");
+        log.info("test controller {}",data);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(ResponseCode.TEST));
     }
 
-    @PostMapping("/fail")
+    @GetMapping("/fail")
     public ResponseEntity<ApiResponse<String>> testFail() {
         String data = "test api fail";
+        log.info("test controller {}",data);
         throw new CustomException(ErrorCode.TEST);
     }
 }
