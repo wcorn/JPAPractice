@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 public class Category extends BaseEntity {
     private String name;
     @ManyToMany
@@ -28,8 +27,4 @@ public class Category extends BaseEntity {
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
-
-
-
-
 }

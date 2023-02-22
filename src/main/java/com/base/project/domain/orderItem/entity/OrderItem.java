@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Getter
-@Setter
 @Entity
 public class OrderItem extends BaseEntity {
     @ManyToOne
