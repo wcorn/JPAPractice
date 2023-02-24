@@ -36,14 +36,14 @@ public class UserService {
         return userAccount.getId();
     }
 
-    private void validateDuplicateNickname(UserAccount userAccount) {
+    void validateDuplicateNickname(UserAccount userAccount) {
         List<UserAccount> userAccounts = userRepository.findByNickname(userAccount.getNickname());
         if(!userAccounts.isEmpty()){
             throw new CustomException(ErrorCode.DUPLICATED_Nickname);
         }
     }
 
-    private void validateDuplicateEmail(UserAccount userAccount) {
+    void validateDuplicateEmail(UserAccount userAccount) {
         List<UserAccount> userAccounts = userRepository.findByEmail(userAccount.getEmail());
         if(!userAccounts.isEmpty()){
             throw new CustomException(ErrorCode.DUPLICATED_EMAIL);

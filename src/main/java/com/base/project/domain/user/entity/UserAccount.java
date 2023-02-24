@@ -18,6 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class UserAccount extends BaseEntity {
 

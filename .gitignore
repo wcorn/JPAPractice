@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 JasyptConfigTest.java
+src/test/resources/application.yml
 ### STS ###
 .apt_generated
 .classpath

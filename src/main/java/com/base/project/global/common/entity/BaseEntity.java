@@ -32,8 +32,4 @@ public class BaseEntity {
     @LastModifiedDate @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    public void updateCreatedAt(Timestamp createdAt){
-        this.createdAt = createdAt;
-    }
-
 }
