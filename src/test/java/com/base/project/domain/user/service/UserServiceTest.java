@@ -24,7 +24,7 @@ class UserServiceTest {
         UserAccount userAccount = UserAccount.builder()
                 .name("kim")
                 .build();
-        Long userId = userService.join(userAccount);
+        Long userId = userService.signup(userAccount);
         assertEquals(userAccount,userRepository.findById(userId).get());
     }
     @Test
@@ -35,9 +35,9 @@ class UserServiceTest {
         UserAccount userAccount2 = UserAccount.builder()
                 .email("dsk08208@gmail.com")
                 .build();
-        userService.join(userAccount1);
+        userService.signup(userAccount1);
         Assertions.assertThrows(CustomException.class, () -> {
-            userService.validateDuplicateEmail(userAccount2);
+            userService.validateDuplicateEmail(userAccount2.getEmail());
         });
     }
     @Test
@@ -48,9 +48,9 @@ class UserServiceTest {
         UserAccount userAccount2 = UserAccount.builder()
                 .nickname("peter")
                 .build();
-        userService.join(userAccount1);
+        userService.signup(userAccount1);
         Assertions.assertThrows(CustomException.class, () -> {
-            userService.validateDuplicateNickname(userAccount2);
+            userService.validateDuplicateNickname(userAccount2.getNickname());
         });
     }
 }

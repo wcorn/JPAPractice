@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         Optional<UserAccount> userAccount = userRepository.findById(Long.parseLong(username));
         return User.withUsername(username)
-                .password(userAccount.get().getName())
+                .password(userAccount.get().getPassword())
                 .authorities(AuthorityUtils.NO_AUTHORITIES)
                 .build();
     }

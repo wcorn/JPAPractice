@@ -19,8 +19,8 @@ public enum ErrorCode {
     DUPLICATED_Nickname(HttpStatus.CONFLICT, "이미 존재하는 닉네임입니다."),
     DUPLICATED_EMAIL(HttpStatus.CONFLICT, "중복된 이메일 입니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
-    USER_FAILED_LOGIN(HttpStatus.NOT_FOUND, "이메일이 없거나 비밀번호가 잘못 되었습니다.");
-
+    USER_FAILED_LOGIN(HttpStatus.NOT_FOUND, "이메일이 없거나 비밀번호가 잘못 되었습니다."),
+    REGEX_FAILED_EMAIL(HttpStatus.BAD_REQUEST,"잘못된 이메일 형식입니다.");
     private final HttpStatus status;
     private final String message;
 
