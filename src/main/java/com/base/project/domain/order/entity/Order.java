@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -18,18 +19,34 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
+@RequiredArgsConstructor
 @ToString
 @Table(name="orders")
 public class Order extends BaseEntity  {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="member_id")
     private UserAccount userAccount;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = ALL)
     @Builder.Default
     private List<OrderItem> orderItems = new ArrayList<>();
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY,cascade = ALL)
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    //==연관관계 메서드==//
+    public void addUserAccount(UserAccount userAccount){
+        this.userAccount = userAccount;
+        userAccount.getOrders().add(this);
+    }
+    public void setOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setItem(this);
+    }
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 }

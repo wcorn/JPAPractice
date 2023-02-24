@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -20,10 +21,14 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @ToString
 public class Delivery extends BaseEntity {
-    @OneToOne(mappedBy = "delivery",fetch = LAZY)
+    @OneToOne(mappedBy = "delivery",fetch = LAZY,cascade = ALL)
     private Order order;
     @Embedded
     private Address address;
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
