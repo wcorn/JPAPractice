@@ -2,10 +2,7 @@ package com.base.project.domain.Item.entity;
 
 import com.base.project.domain.category.entity.Category;
 import com.base.project.global.common.entity.BaseEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorColumn;
@@ -28,5 +25,6 @@ public class Item extends BaseEntity {
     private int price;
     private int stockQuantity;
     @ManyToMany(mappedBy = "items")
+    @Builder.Default
     private List<Category> categories = new ArrayList<>();
 }

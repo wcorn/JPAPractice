@@ -19,8 +19,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Table(name="orders")
 public class Order extends BaseEntity  {

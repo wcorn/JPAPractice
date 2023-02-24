@@ -4,6 +4,7 @@ package com.base.project.domain.category.entity;
 import com.base.project.domain.Item.entity.Item;
 import com.base.project.global.common.entity.BaseEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,9 +12,11 @@ import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.*;
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = PROTECTED)
 public class Category extends BaseEntity {
     private String name;
     @ManyToMany

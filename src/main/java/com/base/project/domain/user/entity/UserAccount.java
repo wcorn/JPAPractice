@@ -4,9 +4,7 @@ import com.base.project.domain.order.entity.Order;
 import com.base.project.global.common.entity.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Fetch;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -22,6 +20,10 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @ToString
 public class UserAccount extends BaseEntity {
+
+    private String Email;
+
+    private String password;
 
     private String name;
 
