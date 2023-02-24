@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -20,13 +21,13 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString
 @Table(name="orders")
 public class Order extends BaseEntity  {
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="member_id")
     private UserAccount userAccount;
     @OneToMany(mappedBy = "order")
     @Builder.Default
     private List<OrderItem> orderItems = new ArrayList<>();
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
     @Enumerated(EnumType.STRING)

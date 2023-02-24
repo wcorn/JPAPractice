@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -19,7 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @ToString
 public class Delivery extends BaseEntity {
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery",fetch = LAZY)
     private Order order;
     @Embedded
     private Address address;
