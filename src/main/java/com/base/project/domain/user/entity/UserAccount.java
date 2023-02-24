@@ -21,9 +21,11 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString
 public class UserAccount extends BaseEntity {
 
-    private String Email;
+    private String email;
 
     private String password;
+
+    private String nickname;
 
     private String name;
 
