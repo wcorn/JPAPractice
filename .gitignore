@@ -5,8 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-firebase_service_key.json
-jasypt_encrypt_decrypt_test.java
+AppConfigTest.java
 ### STS ###
 .apt_generated
 .classpath
