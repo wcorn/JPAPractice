@@ -20,6 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @DiscriminatorColumn(name="dtype")
 @ToString
+@EqualsAndHashCode(callSuper = true)
 public class Item extends BaseEntity {
     private String name;
     private int price;

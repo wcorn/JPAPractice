@@ -3,6 +3,7 @@ package com.base.project.domain.category.entity;
 
 import com.base.project.domain.Item.entity.Item;
 import com.base.project.global.common.entity.BaseEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
+@EqualsAndHashCode(callSuper = true)
 public class Category extends BaseEntity {
     private String name;
     @ManyToMany

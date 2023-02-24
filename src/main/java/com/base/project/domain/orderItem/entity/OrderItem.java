@@ -4,6 +4,7 @@ package com.base.project.domain.orderItem.entity;
 import com.base.project.domain.Item.entity.Item;
 import com.base.project.domain.order.entity.Order;
 import com.base.project.global.common.entity.BaseEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @Entity
 @NoArgsConstructor(access = PROTECTED)
+@EqualsAndHashCode(callSuper = true)
 public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="Item_id")

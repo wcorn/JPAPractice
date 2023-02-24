@@ -21,6 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @ToString
 @Table(name="orders")
+@EqualsAndHashCode(callSuper = true)
 public class Order extends BaseEntity  {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="member_id")

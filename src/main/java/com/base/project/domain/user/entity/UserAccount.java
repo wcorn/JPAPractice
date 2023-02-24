@@ -18,7 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
-@ToString
+@EqualsAndHashCode(callSuper = true)
 public class UserAccount extends BaseEntity {
 
     private String email;
