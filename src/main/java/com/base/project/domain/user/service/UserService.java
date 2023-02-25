@@ -53,7 +53,12 @@ public class UserService {
         return userRepository.findAll();
     }
     //유저 id로 단건 조회
-    public Optional<UserAccount> findOne(Long userId){
-        return userRepository.findById(userId);
+    public UserAccount findOne(Long userId){
+        Optional<UserAccount> userAccount = userRepository.findById(userId);
+        if(userAccount.isPresent()) {
+            return userAccount.get();
+        }
+        else
+            throw new CustomException(ErrorCode.USER_NOT_FOUND);
     }
 }
