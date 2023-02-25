@@ -12,4 +12,5 @@ package com.base.project.domain.delivery.entity;
  * 2023-02-22        peter       최초 생성
  */
 public enum DeliveryStatus {
+    ING,COMP
 }

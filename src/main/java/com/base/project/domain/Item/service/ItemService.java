@@ -20,21 +20,21 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+
     @Transactional
-    public void saveItem(Item item){
+    public void saveItem(Item item) {
         itemRepository.save(item);
     }
 
-    public List<Item> findItem(){
+    public List<Item> findItem() {
         return itemRepository.findAll();
     }
 
-    public Item findItem(Long id){
+    public Item findItem(Long id) {
         Optional<Item> item = itemRepository.findById(id);
-        if(item.isPresent()) {
+        if (item.isPresent()) {
             return item.get();
-        }
-        else
+        } else
             throw new CustomException(ErrorCode.USER_NOT_FOUND);
     }
 }

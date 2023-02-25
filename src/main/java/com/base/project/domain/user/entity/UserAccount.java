@@ -33,7 +33,7 @@ public class UserAccount extends BaseEntity {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "userAccount",cascade = ALL)
+    @OneToMany(mappedBy = "userAccount", cascade = ALL)
     @Builder.Default
     private List<Order> orders = new ArrayList<>();
 }

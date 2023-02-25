@@ -22,7 +22,9 @@ public enum ErrorCode {
     USER_FAILED_LOGIN(HttpStatus.NOT_FOUND, "이메일이 없거나 비밀번호가 잘못 되었습니다."),
     REGEX_FAILED_EMAIL(HttpStatus.BAD_REQUEST,"잘못된 이메일 형식입니다."),
     //item
-    ITEM_NOT_EXIST(HttpStatus.BAD_REQUEST,"아이템이 없습니다.");
+    ITEM_NOT_EXIST(HttpStatus.BAD_REQUEST,"아이템이 없습니다."),
+    ALREADY_DELIVERY(HttpStatus.CONFLICT,"이미 배송완료된 상품입니다.." ),
+    ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "없는 주문입니다.");
     private final HttpStatus status;
     private final String message;
 

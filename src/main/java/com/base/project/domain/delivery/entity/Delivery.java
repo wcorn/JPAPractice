@@ -19,7 +19,7 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class Delivery extends BaseEntity {
-    @OneToOne(mappedBy = "delivery",fetch = LAZY,cascade = ALL)
+    @OneToOne(mappedBy = "delivery", fetch = LAZY, cascade = ALL)
     private Order order;
     @Embedded
     private Address address;

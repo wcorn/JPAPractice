@@ -20,7 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
-@DiscriminatorColumn(name = "dtype")
+@DiscriminatorColumn(name = "DTYPE")
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class Item extends BaseEntity {
@@ -36,8 +36,6 @@ public class Item extends BaseEntity {
 
     /**
      * quantity 증가
-     *
-     * @param quantity
      */
     public void addStock(int quantity) {
         this.stockQuantity += quantity;
@@ -45,8 +43,6 @@ public class Item extends BaseEntity {
 
     /**
      * quantity 감소
-     *
-     * @param quantity
      */
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
