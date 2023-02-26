@@ -30,7 +30,8 @@ import java.util.Collections;
 public class SecurityConfig {
     private static final String[] PERMITTED_URLS = {
             "/test/**",
-            "/users/signup"
+            "/users/signup",
+            "/orders"
     };
     @Bean
     public static BCryptPasswordEncoder bCryptPasswordEncoder() {

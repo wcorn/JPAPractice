@@ -1,7 +1,6 @@
 package com.base.project.domain.order.service;
 
 import com.base.project.domain.Item.entity.Book;
-import com.base.project.domain.Item.entity.Item;
 import com.base.project.domain.Item.service.ItemService;
 import com.base.project.domain.order.entity.Order;
 import com.base.project.domain.order.entity.OrderStatus;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;

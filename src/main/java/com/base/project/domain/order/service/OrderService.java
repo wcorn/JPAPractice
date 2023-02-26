@@ -4,18 +4,20 @@ package com.base.project.domain.order.service;
 import com.base.project.domain.Item.entity.Item;
 import com.base.project.domain.Item.service.ItemService;
 import com.base.project.domain.delivery.entity.Delivery;
+import com.base.project.domain.order.dto.OrderSearch;
 import com.base.project.domain.order.entity.Order;
 import com.base.project.domain.order.repository.OrderRepository;
-import com.base.project.domain.orderItem.entity.OrderItem;
 import com.base.project.domain.user.entity.UserAccount;
 import com.base.project.domain.user.service.UserService;
 import com.base.project.global.common.api.ErrorCode;
 import com.base.project.global.common.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -37,19 +39,6 @@ public class OrderService {
      * @param count
      * @return
      */
-    @Transactional
-    public Long order(Long userId, Long itemId, int count) {
-        UserAccount userAccount = userService.findOne(userId);
-        Item item = itemService.findItem(itemId);
-
-        Delivery delivery = Delivery.builder()
-                .address(userAccount.getAddress())
-                .build();
-        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
-        Order order = Order.createOrder(userAccount, delivery, orderItem);
-        orderRepository.save(order);
-        return order.getId();
-    }
 
     /**
      * 주문 취소
@@ -76,5 +65,9 @@ public class OrderService {
         } else {
             throw new CustomException(ErrorCode.ORDER_NOT_FOUND);
         }
+    }
+
+    public List<Order> findPagingByUserNameAndOrderStatus(OrderSearch orderSearch, Pageable pageable){
+        return orderRepository.findPagingByUserNameAndOrderStatus(orderSearch, pageable);
     }
 }

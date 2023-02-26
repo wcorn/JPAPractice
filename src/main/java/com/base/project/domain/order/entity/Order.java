@@ -28,7 +28,7 @@ import static lombok.AccessLevel.PROTECTED;
 @EqualsAndHashCode(callSuper = true)
 public class Order extends BaseEntity {
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "user_id")
     private UserAccount userAccount;
     @OneToMany(mappedBy = "order", cascade = ALL)
     @Builder.Default
