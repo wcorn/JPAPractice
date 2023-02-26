@@ -37,7 +37,6 @@ public class UserController {
         Regex.isRegexEmail(signUpRequestDto.getEmail());
         userService.validateDuplicateEmail(signUpRequestDto.getEmail());
         userService.validateDuplicateNickname(signUpRequestDto.getNickname());
-
         UserAccount userAccount = UserAccount.builder()
                 .name(signUpRequestDto.getName())
                 .nickname(signUpRequestDto.getNickname())

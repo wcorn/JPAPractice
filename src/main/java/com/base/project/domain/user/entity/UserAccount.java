@@ -36,4 +36,5 @@ public class UserAccount extends BaseEntity {
     @OneToMany(mappedBy = "userAccount", cascade = ALL)
     @Builder.Default
     private List<Order> orders = new ArrayList<>();
+
 }
