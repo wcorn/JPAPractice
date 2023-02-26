@@ -23,6 +23,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 @ToString
 @Table(name = "orders")
 @EqualsAndHashCode(callSuper = true)

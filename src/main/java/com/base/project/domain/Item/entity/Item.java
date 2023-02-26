@@ -20,6 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 @DiscriminatorColumn(name = "DTYPE")
 @ToString
 @EqualsAndHashCode(callSuper = true)

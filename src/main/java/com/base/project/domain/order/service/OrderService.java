@@ -7,6 +7,7 @@ import com.base.project.domain.delivery.entity.Delivery;
 import com.base.project.domain.order.dto.OrderSearch;
 import com.base.project.domain.order.entity.Order;
 import com.base.project.domain.order.repository.OrderRepository;
+import com.base.project.domain.orderItem.entity.OrderItem;
 import com.base.project.domain.user.entity.UserAccount;
 import com.base.project.domain.user.service.UserService;
 import com.base.project.global.common.api.ErrorCode;
@@ -33,17 +34,22 @@ public class OrderService {
 
     /**
      * 주문 생성
-     *
-     * @param userId
-     * @param itemId
-     * @param count
-     * @return
      */
+    @Transactional
+    public Long order(Long userId, Long itemId, int count) {
+        UserAccount userAccount = userService.findOne(userId);
+        Item item = itemService.findItem(itemId);
 
+        Delivery delivery = Delivery.builder()
+                .address(userAccount.getAddress())
+                .build();
+        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
+        Order order = Order.createOrder(userAccount, delivery, orderItem);
+        orderRepository.save(order);
+        return order.getId();
+    }
     /**
      * 주문 취소
-     *
-     * @param orderId
      */
     @Transactional
     public void cancelOrder(Long orderId) {
@@ -53,9 +59,6 @@ public class OrderService {
 
     /**
      * 주문 조회
-     *
-     * @param orderId
-     * @return
      */
 
     public Order findOrder(Long orderId) {

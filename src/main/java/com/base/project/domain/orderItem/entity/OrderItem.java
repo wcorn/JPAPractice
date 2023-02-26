@@ -4,10 +4,7 @@ package com.base.project.domain.orderItem.entity;
 import com.base.project.domain.Item.entity.Item;
 import com.base.project.domain.order.entity.Order;
 import com.base.project.global.common.entity.BaseEntity;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
@@ -21,6 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class OrderItem extends BaseEntity {

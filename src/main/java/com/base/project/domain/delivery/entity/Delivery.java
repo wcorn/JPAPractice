@@ -16,6 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class Delivery extends BaseEntity {
