@@ -1,6 +1,5 @@
 package com.base.project.global.config.SecurityConfig.jwt;
 
-import com.base.project.domain.user.dto.response.AccessTokenDto;
 import com.base.project.domain.user.repository.UserRepository;
 import com.base.project.global.common.api.ApiResponse;
 import com.base.project.global.common.api.ResponseCode;
