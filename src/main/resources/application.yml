@@ -2,17 +2,16 @@ server:
   port: 9000
 spring:
   datasource:
-    url: ENC(cIuPL+k+HUAjcJl/S0A4GMWkESQgnncKg/+1dhMmcyRtfCfv+LfHn18saw0MboP/Zq79RpbJOJSNo4CutWaCd/Q6k7fbvDn3ZwrPBtV+nwGNMFTZ34Zoi0+bhNJwMTPJYGMGwS/7Oq3zteKWIlCvMpbGYa0gFmKUSvN7x+F+cE0mz22H5VgzgvJ3BsMTrN3o6CV1rp5a5jHFBA0XGRDcE7Rt3B/7oUjDABZYpbPF5NO9GHVxrHgrjyMAyAjL5pzF1RlJ19gzDpTGdo7kS/iRUQ==)
-    username: ENC(Wr2PSoC4iA2WVnuOr/Vd4A==)
-    password: ENC(lABCyteeZHYrZgt3cOwkvmDkqP+8TZ09XxtCw7cVtMo=)
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-    generate-ddl: true
     show-sql: true
   mvc:
     path match:

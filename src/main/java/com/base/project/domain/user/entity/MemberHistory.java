@@ -4,18 +4,20 @@ import com.base.project.global.common.entity.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import static lombok.AccessLevel.PROTECTED;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @SuperBuilder
-@NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class UserAccount extends BaseEntity {
+public class MemberHistory extends BaseEntity {
+
 
     private String name;
 
@@ -25,8 +27,7 @@ public class UserAccount extends BaseEntity {
 
     private String password;
 
-
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
